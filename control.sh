@@ -46,7 +46,7 @@ _create_dot_env () {
 # External IP address, used in rnode://.... address
 HOST_IP=$host_ip
 
-RNODE_IMAGE=tgrospic/rnode:v0.9.26-rc
+RNODE_IMAGE=tgrospic/rnode:v0.9.26-rc1
 
 # Uncomment in compose file if running multiple containers
 MEMORY_LIMIT=16g
@@ -58,9 +58,6 @@ JMX_PORT=9991
 
 # Devnet 2 - observer 2 https://observer2-lfs.devmainnet.dev.rchain.coop/status
 BOOTSTRAP="rnode://54753cef1939ce0247e1d0c2a0404f4ec185f11c@observer2-lfs.devmainnet.dev.rchain.coop?protocol=41400&discovery=41404"
-
-# Devnet 3 - LFS - http://141.125.66.53:40403/status
-#BOOTSTRAP="rnode://2980c5a83f5fb571d2bc9c4927a898566fba363d@141.125.66.53?protocol=40400&discovery=40404"
 EOF
 }
 
