@@ -54,10 +54,7 @@ MEMORY_LIMIT=16g
 JMX_PORT=9991
 
 # Devnet 2 - observer 1 https://observer1-lfs.devmainnet.dev.rchain.coop/status
-#BOOTSTRAP="rnode://d74dacb93bcd0536f735711961c31ea7783fd7f3@observer1-lfs.devmainnet.dev.rchain.coop?protocol=40400&discovery=40404"
-
-# Devnet 2 - observer 2 https://observer2-lfs.devmainnet.dev.rchain.coop/status
-BOOTSTRAP="rnode://54753cef1939ce0247e1d0c2a0404f4ec185f11c@observer2-lfs.devmainnet.dev.rchain.coop?protocol=41400&discovery=41404"
+BOOTSTRAP="rnode://d74dacb93bcd0536f735711961c31ea7783fd7f3@observer1-lfs.devmainnet.dev.rchain.coop?protocol=40400&discovery=40404"
 EOF
 }
 
