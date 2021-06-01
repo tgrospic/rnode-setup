@@ -6,8 +6,8 @@ x-rnode:
   user: root
   networks:
     - rchain-net
+  restart: always
   # mem_limit: $MEMORY_LIMIT
-  # restart: always
 
 services:
 
@@ -31,8 +31,8 @@ services:
       --bootstrap $BOOTSTRAP
       --host $HOST_IP
       --no-upnp
-      --network-id mainnet
-      --shard-name root
+      --network-id $RNODE_NETWORK
+      --shard-name $RNODE_SHARD
       --fault-tolerance-threshold -1
       --max-number-of-parents 1
       --api-max-blocks-limit=100

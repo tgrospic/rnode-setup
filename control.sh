@@ -46,7 +46,15 @@ _create_dot_env () {
 # External IP address, used in rnode://.... address
 HOST_IP=$host_ip
 
-RNODE_IMAGE=rchain/rnode:v0.9.26-rc
+RNODE_IMAGE=rchain/rnode:v0.10.2
+
+# Main net
+# RNODE_NETWORK=mainnet
+# RNODE_SHARD=root
+
+# Test net
+RNODE_NETWORK=testnet02032020
+RNODE_SHARD=rchain
 
 # Uncomment in compose file if running multiple containers
 MEMORY_LIMIT=16g
