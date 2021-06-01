@@ -46,7 +46,10 @@ _create_dot_env () {
 # External IP address, used in rnode://.... address
 HOST_IP=$host_ip
 
-RNODE_IMAGE=rchain/rnode:v0.10.2
+# RNODE_IMAGE=rchain/rnode:v0.10.2
+
+# gRPC protocol server SSL disabled
+RNODE_IMAGE=tgrospic/rnode:grpc-ssl-off
 
 # Main net
 # RNODE_NETWORK=mainnet
@@ -62,7 +65,10 @@ MEMORY_LIMIT=16g
 JMX_PORT=9991
 
 # Devnet 2 - observer 1 https://observer1-lfs.devmainnet.dev.rchain.coop/status
-BOOTSTRAP="rnode://d74dacb93bcd0536f735711961c31ea7783fd7f3@observer1-lfs.devmainnet.dev.rchain.coop?protocol=40400&discovery=40404"
+# BOOTSTRAP="rnode://d74dacb93bcd0536f735711961c31ea7783fd7f3@observer1-lfs.devmainnet.dev.rchain.coop?protocol=40400&discovery=40404"
+
+# Test net LFS observer
+BOOTSTRAP="rnode://ef5438d8042be159cb84caf5ad50f8192540dff1@observer-lfs.testnet.rchain.coop?protocol=46400&discovery=46404"
 EOF
 }
 

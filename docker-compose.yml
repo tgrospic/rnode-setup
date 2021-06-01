@@ -11,6 +11,23 @@ x-rnode:
 
 services:
 
+  nginx:
+    mem_limit: 100m
+    restart: always
+    image: nginx
+    container_name: nginx
+    ports:
+      - $HOST_IP:40400:40400
+      - $HOST_IP:40401:40401
+      - $HOST_IP:40403:40403
+      - $HOST_IP:40404:40404
+    volumes:
+      - ./nginx:/etc/nginx/conf.d:ro
+      - ./nginx-logs:/var/log/nginx
+      - ./data/rnode:/rnode
+    networks:
+      - rchain-net
+
   rnode:
     << : *default-rnode
     container_name: rnode
@@ -38,9 +55,8 @@ services:
       --api-max-blocks-limit=100
       --api-enable-reporting
     ports:
-      - $HOST_IP:40400:40400
-      - $HOST_IP:40404:40404
-      - $HOST_IP:40403:40403
+      - 127.0.0.1:40402:40402
+      - 127.0.0.1:40405:40405
       - 127.0.0.1:$JMX_PORT:$JMX_PORT
     volumes:
       - ./data/rnode:/var/lib/rnode
