@@ -22,7 +22,8 @@ services:
       - $HOST_IP:40403:40403
       - $HOST_IP:40404:40404
     volumes:
-      - ./nginx:/etc/nginx/conf.d:ro
+      # - ./nginx:/etc/nginx/conf.d:ro
+      - ./nginx:/etc/nginx/templates:ro
       - ./nginx-logs:/var/log/nginx
       - ./data/rnode:/rnode
     networks:

@@ -4,22 +4,22 @@ server {
   server_name ${HOST_IP};
 
   location / {
-    grpc_pass grpc://rnode:40400;
-    
-    # With SSL nginx throws error:
+    # grpc_pass grpc://rnode:40400;
+
+    # With TLS nginx throws error:
     # SSL_do_handshake() failed (SSL: error:14094410:SSL routines:ssl3_read_bytes:sslv3 alert handshake failure:SSL alert number 40) while SSL handshaking to upstream, ...
-    # grpc_pass grpcs://rnode:40400;
-    # grpc_set_header Host $host;
-    # grpc_ssl_name $host;
-    # grpc_ssl_server_name on;
-    # grpc_ssl_session_reuse off;
-    # grpc_ssl_protocols TLSv1.2 TLSv1.3;
+    grpc_pass grpcs://rnode:40400;
+    grpc_set_header Host $host;
+    grpc_ssl_name $host;
+    grpc_ssl_server_name on;    # default off
+    grpc_ssl_session_reuse off; # default on
+    grpc_ssl_protocols TLSv1.2 TLSv1.3;
   }
-  
+
   ssl_protocols       TLSv1.2 TLSv1.3;
   ssl_certificate     /rnode/node.certificate.pem;
   ssl_certificate_key /rnode/node.key.pem;
-  
+
   access_log /var/log/nginx/rnode-40400-access.log;
   error_log  /var/log/nginx/rnode-40400-error.log;
 }
@@ -44,7 +44,7 @@ server {
 
   access_log /var/log/nginx/rnode-http-access.log;
   error_log  /var/log/nginx/rnode-http-error.log;
-  
+
   gzip on;
   gzip_types      application/json;
   gzip_proxied    no-cache no-store private expired auth;
@@ -57,7 +57,7 @@ server {
   server_name ${HOST_IP};
 
   location / { grpc_pass grpc://rnode:40404; }
-  
+
   access_log /var/log/nginx/rnode-40404-access.log;
   error_log  /var/log/nginx/rnode-40404-error.log;
 }
