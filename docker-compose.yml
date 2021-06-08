@@ -4,8 +4,6 @@ x-rnode:
   &default-rnode
   image: $RNODE_IMAGE
   user: root
-  networks:
-    - rchain-net
   restart: always
   # mem_limit: $MEMORY_LIMIT
 
@@ -26,8 +24,6 @@ services:
       - ./nginx:/etc/nginx/templates:ro
       - ./nginx-logs:/var/log/nginx
       - ./data/rnode:/rnode
-    networks:
-      - rchain-net
 
   rnode:
     << : *default-rnode
@@ -56,6 +52,7 @@ services:
       --api-max-blocks-limit=100
       --api-enable-reporting
     ports:
+      # - $HOST_IP:40400:40400
       - 127.0.0.1:40402:40402
       - 127.0.0.1:40405:40405
       - 127.0.0.1:$JMX_PORT:$JMX_PORT
@@ -63,6 +60,3 @@ services:
       - ./data/rnode:/var/lib/rnode
       - ./data/rnode-diag:/var/lib/rnode-diag
       - ./config/logback.xml:/logback.xml
-
-networks:
-  rchain-net:

@@ -16,6 +16,8 @@ server {
     grpc_ssl_protocols TLSv1.2 TLSv1.3;
   }
 
+  client_max_body_size 10M;
+
   ssl_protocols       TLSv1.2 TLSv1.3;
   ssl_certificate     /rnode/node.certificate.pem;
   ssl_certificate_key /rnode/node.key.pem;
