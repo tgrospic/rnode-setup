@@ -46,23 +46,23 @@ _create_dot_env () {
 # External IP address, used in rnode://.... address
 HOST_IP=$host_ip
 
-RNODE_IMAGE=rchain/rnode:v0.10.2
-
-# Main net
-# RNODE_NETWORK=mainnet
-# RNODE_SHARD=root
-
-# Test net
-RNODE_NETWORK=testnet02032020
-RNODE_SHARD=rchain
+RNODE_IMAGE=rchain/rnode:v0.12.3
 
 # Uncomment in compose file if running multiple containers
 MEMORY_LIMIT=16g
 
 JMX_PORT=9991
 
-# Devnet 2 - observer 1 https://observer1-lfs.devmainnet.dev.rchain.coop/status
-BOOTSTRAP="rnode://d74dacb93bcd0536f735711961c31ea7783fd7f3@observer1-lfs.devmainnet.dev.rchain.coop?protocol=40400&discovery=40404"
+# Main net
+# RNODE_NETWORK=mainnet
+# RNODE_SHARD=root
+
+# Test net
+RNODE_NETWORK=testnet210604
+RNODE_SHARD=testnet2
+
+# Test net observer node
+BOOTSTRAP="rnode://d5df848b92b3ec79b097f474769604c32ed3bf7d@observer.testnet.rchain.coop?protocol=45400&discovery=45404"
 EOF
 }
 
