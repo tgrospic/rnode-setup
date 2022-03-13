@@ -7,7 +7,7 @@ NOTE: Currently, setup is provided only for node running inside Docker container
 # Install
 
 [install.sh](install.sh) script contains commands to install all necessary dependencies. It will also generate **.env** file with the default variables used by Docker Compose for easier modification.  
-Script will try to find external IP address from network adapter.
+Script will try to find external IP address from network adapter and set `HOST_IP` variable in `.env` file. If network adapter `eth0` is not found, `HOST_IP` must be set manually.
 
 ```sh
 curl https://raw.githubusercontent.com/tgrospic/rnode-setup/master/install.sh | bash
