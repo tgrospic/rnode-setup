@@ -28,16 +28,16 @@ install_dependencies () {
   apt-get update
   apt-get install -y docker-ce docker-ce-cli containerd.io
   # Install Docker Compose
-  curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   chmod +x /usr/local/bin/docker-compose
 }
 
 # Creates initial .env file from template
 _create_dot_env () {
   envPath="$1"
-  host_ip=`ip addr show eth0 | grep -Po 'inet [0-9.]+' | awk '{print $2}'`
+  export host_ip=`ip addr show eth0 | grep -Po 'inet [0-9.]+' | awk '{print $2}'`
   if [ ! $host_ip ]; then
-    host_ip="127.0.0.1"
+    host_ip='"Host IP not detected on eth0 interface"'
   fi
   # Create .env from template file
   envsubst < $CWD/template.env > $envPath
