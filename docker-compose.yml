@@ -3,31 +3,14 @@ version: '2.3'
 x-rnode:
   &default-rnode
   image: $RNODE_IMAGE
-  user: root
-  networks:
-    - rchain-net
-  restart: always
-  # mem_limit: $MEMORY_LIMIT
+  # restart: always
 
 services:
 
   rnode:
     << : *default-rnode
     container_name: rnode
-    command:
-      -Dcom.sun.management.jmxremote.port=$JMX_PORT
-      -Dcom.sun.management.jmxremote.rmi.port=$JMX_PORT
-      -Dcom.sun.management.jmxremote.local.only=false
-      -Dcom.sun.management.jmxremote.authenticate=false
-      -Dcom.sun.management.jmxremote.ssl=false
-      -Djava.rmi.server.hostname=localhost
-      -Dlogback.configurationFile=/logback.xml
-      -XX:+HeapDumpOnOutOfMemoryError
-      -XX:HeapDumpPath=/var/lib/rnode-diag/heapdump_OOM.hprof
-      -XX:+ExitOnOutOfMemoryError
-      -XX:MaxDirectMemorySize=200m
-      -XX:MaxRAMPercentage=65
-      run
+    command: run
       --bootstrap $BOOTSTRAP
       --host $HOST_IP
       --no-upnp
@@ -37,6 +20,21 @@ services:
       --max-number-of-parents 1
       --api-max-blocks-limit=100
       --api-enable-reporting
+    environment:
+      JAVA_OPTS: >
+        -Dcom.sun.management.jmxremote.port=$JMX_PORT
+        -Dcom.sun.management.jmxremote.rmi.port=$JMX_PORT
+        -Dcom.sun.management.jmxremote.local.only=false
+        -Dcom.sun.management.jmxremote.authenticate=false
+        -Dcom.sun.management.jmxremote.ssl=false
+        -Djava.rmi.server.hostname=localhost
+
+        -Dlogback.configurationFile=/logback.xml
+        -XX:+HeapDumpOnOutOfMemoryError
+        -XX:HeapDumpPath=/var/lib/rnode-diag/heapdump_OOM.hprof
+        -XX:+ExitOnOutOfMemoryError
+        -XX:MaxDirectMemorySize=300m
+        -XX:MaxRAMPercentage=50
     ports:
       - $HOST_IP:40400:40400
       - $HOST_IP:40404:40404
@@ -46,6 +44,3 @@ services:
       - ./data/rnode:/var/lib/rnode
       - ./data/rnode-diag:/var/lib/rnode-diag
       - ./config/logback.xml:/logback.xml
-
-networks:
-  rchain-net:
