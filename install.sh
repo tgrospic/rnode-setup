@@ -10,7 +10,7 @@ git clone https://github.com/tgrospic/rnode-setup /root/rchain
 cd /root/rchain
 
 # Include control commands
-. control.sh
+. scripts/control.sh
 
 # Start setup
 install_dependencies

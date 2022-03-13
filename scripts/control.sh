@@ -32,43 +32,24 @@ install_dependencies () {
   chmod +x /usr/local/bin/docker-compose
 }
 
-# Creates initial .env file
+# Creates initial .env file from template
 _create_dot_env () {
   envPath="$1"
   host_ip=`ip addr show eth0 | grep -Po 'inet [0-9.]+' | awk '{print $2}'`
   if [ ! $host_ip ]; then
     host_ip="127.0.0.1"
   fi
-  tee $envPath <<EOF
-# RNode configuration
-# ---------------------------------------------------------------------------------------------------
+  # Create .env from template file
+  envsubst < $CWD/template.env > $envPath
 
-# External IP address, used in rnode://.... address
-HOST_IP=$host_ip
-
-RNODE_IMAGE=rchain/rnode:v0.12.3
-
-# Uncomment in compose file if running multiple containers
-MEMORY_LIMIT=16g
-
-JMX_PORT=9991
-
-# Main net
-# RNODE_NETWORK=mainnet
-# RNODE_SHARD=root
-
-# Test net
-RNODE_NETWORK=testnet210604
-RNODE_SHARD=testnet2
-
-# Test net observer node
-BOOTSTRAP="rnode://d5df848b92b3ec79b097f474769604c32ed3bf7d@observer.testnet.rchain.coop?protocol=45400&discovery=45404"
-EOF
+  echo ".env config file created"
 }
 
-if [ ! -f $CWD/.env ]; then
-  # Create initial .env from template
-  _create_dot_env $CWD/.env
+envPath="$CWD/../.env"
+
+if [ ! -f $envPath ]; then
+  # Create initial .env file
+  _create_dot_env $envPath
 
   # Append to .bashrc
   tee -a ~/.bashrc <<EOF
