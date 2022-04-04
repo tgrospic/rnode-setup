@@ -36,9 +36,9 @@ services:
         -XX:MaxDirectMemorySize=300m
         -XX:MaxRAMPercentage=50
     ports:
-      - $HOST_IP:40400:40400
-      - $HOST_IP:40404:40404
-      - $HOST_IP:40403:40403
+      - 40400:40400
+      - 40404:40404
+      - 40403:40403
       - 127.0.0.1:$JMX_PORT:$JMX_PORT
     volumes:
       - ./data/rnode:/var/lib/rnode
