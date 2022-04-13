@@ -59,7 +59,8 @@ runcmd:
 
 ## JVM diagnostics
 
-Docker Compose configuration contains Java options to enable JMX connection to JVM process. [VisualVM](https://visualvm.github.io/) GUI tool can be used to connect and monitor JVM parameters like CPU and memory usage, perform GC, etc.
+Docker Compose configuration contains Java options to enable JMX connection to JVM process. [VisualVM](https://visualvm.github.io/) GUI tool can be used to connect and monitor JVM parameters like CPU and memory usage, perform GC, etc.  
+NOTE: To monitor Direct Buffer memory install _VisualVM-BufferMonitor_ plugin which can be found under _Tools > Plugins > Available Plugins_ menu.
 
 With SSH tunneling, JMX port can be made accessible to local machine where VisualVM is running at `localhost:9991`.
 
